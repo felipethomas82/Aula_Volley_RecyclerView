@@ -1,7 +1,10 @@
 package com.example.pc.aula_volley_httprequest;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.android.volley.Cache;
@@ -23,13 +26,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AtvPosts extends AppCompatActivity {
+
+    List<Post> posts = new ArrayList<Post>();
+    RecyclerView recyclerView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atv_posts);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        context = this;
 
         carregaPosts();
     }
@@ -65,6 +76,10 @@ public class AtvPosts extends AppCompatActivity {
                                 posts.add(post);
                             } //fim for
 
+                            //seta o adapter do recyclerView
+                            recyclerView.setAdapter(new AdaptadorPost(posts, context));
+                            RecyclerView.LayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                            recyclerView.setLayoutManager(layout);
                             //Log.i("TESTEZAO", posts.toString());
                         } catch (Exception e) {
                             e.printStackTrace();

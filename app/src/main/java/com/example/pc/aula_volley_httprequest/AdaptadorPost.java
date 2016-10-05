@@ -42,7 +42,7 @@ public class AdaptadorPost extends RecyclerView.Adapter<AdaptadorPost.PostViewHo
         holder.tvSubtitulo.setText(post.getSubtitulo());
         holder.tvUsuario.setText(post.getUsuario());
         holder.tvTexto.setText(post.getTexto());
-        
+
     }
 
     @Override
