@@ -69,15 +69,15 @@ public class AtvPosts extends AppCompatActivity {
                         try {
                             //Log.i("Teste", response.toString());
                             JSONArray jsonArray = response.getJSONArray("posts");
+                            Gson gson = new Gson();
                             for (int i=0; i<jsonArray.length(); i++){
                                 //Log.i("Testezin", jsonArray.getJSONObject(i).toString());
-                                Gson gson = new Gson();
                                 Post post = gson.fromJson(jsonArray.getJSONObject(i).toString(), Post.class);
                                 posts.add(post);
                             } //fim for
 
                             //seta o adapter do recyclerView
-                            recyclerView.setAdapter(new AdaptadorPost(posts, context));
+                            recyclerView.setAdapter(new AdaptadorPost(posts, context, "http://10.0.3.2")); //TODO: Criar string Static da url
                             RecyclerView.LayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                             recyclerView.setLayoutManager(layout);
                             //Log.i("TESTEZAO", posts.toString());

@@ -2,11 +2,14 @@ package com.example.pc.aula_volley_httprequest;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -18,10 +21,12 @@ public class AdaptadorPost extends RecyclerView.Adapter<AdaptadorPost.PostViewHo
 
     private List<Post> posts;
     private Context context;
+    private String url;
 
-    public AdaptadorPost(List<Post> posts, Context context) {
+    public AdaptadorPost(List<Post> posts, Context context, String url) {
         this.posts = posts;
         this.context = context;
+        this.url = url;
     }
 
     @Override
@@ -42,6 +47,11 @@ public class AdaptadorPost extends RecyclerView.Adapter<AdaptadorPost.PostViewHo
         holder.tvSubtitulo.setText(post.getSubtitulo());
         holder.tvUsuario.setText(post.getUsuario());
         holder.tvTexto.setText(post.getTexto());
+
+        //seta a imagem do imageView
+        //O domínio já foi passado como parametro no construtor da classe
+        Log.i("Picasso", url + post.foto);
+        Picasso.with(context).load(url + post.foto).into(holder.ivFoto);
 
     }
 
